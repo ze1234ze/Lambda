@@ -1,0 +1,67 @@
+using Lambda;
+
+List<SomeClass> list = new List<SomeClass>();
+
+//list.Add(new SomeClass() { Id = 1, Name = "Mike" });
+//list.Add(new SomeClass() { Id = 2, Name = "Spike" });
+//list.Add(new SomeClass() { Id = 3, Name = "Heik" });
+//list.Add(new SomeClass() { Id = 4, Name = "Nikey" });
+
+
+
+for(int i = 0; i <= 3; i++)
+{
+    Console.WriteLine("please give the name");
+    string name = Console.ReadLine();
+    Console.WriteLine("Bitte 1 if on or 2 if off");
+    int oo = Convert.ToInt32(Console.ReadLine());
+    OnOrOff newOnOrOff;
+    if(oo == 1)
+    {
+        newOnOrOff = OnOrOff.On;
+    }
+    else
+    {
+        newOnOrOff= OnOrOff.Off;
+    }
+
+    list.Add(new SomeClass() { Id = i, Name = name, onOrOff = newOnOrOff });
+}
+
+
+
+var newList = list.Where(x => x.Id <= 10).Where(y => y.onOrOff == OnOrOff.On).OrderBy(y => y.Name).ToList();
+
+foreach(var see in newList)
+{
+    Console.Write($"Name: {see.Name} \n");
+}
+Console.ReadLine();
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lambda
+{
+    public class SomeClass
+    {
+        public int Id { get; set; } 
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Type { get; set; }
+        public OnOrOff onOrOff { get; set; }
+
+
+    }
+
+    public enum OnOrOff
+    {
+        On,
+        Off
+    }
+}
